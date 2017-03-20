@@ -1,0 +1,16 @@
+1、	l=event.clientX-disX,
+	t=event.clientY-disY,
+这里之所以不写成l=oDrag.offsetLeft，是因为要将l与光标结合在一起
+
+2、document.onmousemove=function(event)
+	{
+		event=event||window.event;
+		fnmove(event,disX,disY);
+	}
+	//鼠标释放
+   document.onmouseup=function()
+	{
+		document.onmousemove=null;
+		document.onmouseup=null;
+	}
+这里不写成oDrag.onmousemove是因为如果拖动速度过快，导致鼠标滑出登录框的范围，则移动不起效果。
