@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js放大镜特效</title>
+</head>
+<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	#smallBox{
+		width:400px;
+		height:255px;
+		border:1px solid #ccc;
+		position:relative;
+		top:50px;
+		left:50px;
+		cursor:move;
+	}
+	#floatBox{
+		display:none;
+		z-index:10;
+		width:160px;
+		height:120px;
+		background-color: #ffc;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+		position:absolute;
+	}
+	#bigBox{
+		display: none;
+		width: 400px;
+		height:300px;
+		position:absolute;
+		top:50px;
+		left:500px;
+		overflow:hidden;
+		border:1px solid #ccc;
+	}
+	img{
+		position:absolute;
+	}
+</style>
+<script type="text/javascript">
+	function addEvent(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false);
+		}else if(element.attachEvent){
+			element.attachEvent("on"+type,handler);
+		}else{
+			element["on"+type]=handler;
+		}
+	}
+	window.onload=function(){
+		var smallBox=document.getElementById("smallBox");
+	var	floatBox=document.getElementById("floatBox");
+	var	imageBox=document.getElementById("imageBox");
+	var	bigBox=document.getElementById("bigBox");
+	var	bigBoxImage=bigBox.getElementsByTagName("img")[0];
+	addEvent(smallBox,"mouseenter",function(){
+		floatBox.style.display="block";
+		bigBox.style.display="block";
+	});
+	addEvent(smallBox,"mouseleave",function(){
+		floatBox.style.display="none";
+		bigBox.style.display="none";
+	});
+	addEvent(smallBox,"mousemove",function(event){
+		event=event||window.event;
+		var left=event.clientX-smallBox.offsetLeft-floatBox.offsetWidth/2;
+		var top=event.clientY-smallBox.offsetTop-floatBox.offsetHeight/2;
+		if(left<0){
+			left=0;
+		}else if(left>smallBox.offsetWidth-floatBox.offsetWidth){
+			left=smallBox.offsetWidth-floatBox.offsetWidth-2;
+		}
+		if(top<0){
+			top=0;
+		}else if(top>smallBox.offsetHeight-floatBox.offsetHeight){
+			top=smallBox.offsetHeight-floatBox.offsetHeight-2;
+		}
+		floatBox.style.left=left+"px";
+		floatBox.style.top=top+"px";
+		var bigLeft=bigBox.offsetWidth*left/floatBox.offsetWidth;
+		var bigTop=bigBox.offsetHeight*top/floatBox.offsetHeight;
+		bigBoxImage.style.left=-bigLeft+"px";
+		bigBoxImage.style.top=-bigTop+"px";
+	});
+	}
+</script>
+<body>
+<div id="smallBox">
+	<div id="floatBox">
+	</div>
+	<div id="imageBox">
+		<img src="macbook-small.jpg" alt="macbook-small" />
+	</div>
+</div>
+<div id="bigBox">
+	<img src="macbook-big.jpg"  alt="macbook-big" />
+</div>	
+</body>
+</html>
