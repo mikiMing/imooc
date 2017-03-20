@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>限时抢</title>
+	<script type="text/javascript">
+	    var timer=null;
+		window.onload=function(){
+			timer=setInterval(showTime,1000);
+		}
+		function showTime(){
+			var timeshow=document.getElementById("timeshow"),
+			    now=new Date(),
+			    timedate=new Date("2016,8,27,11:00:00"),
+			    lefttime=timedate.getTime()-now.getTime(),
+			    day=parseInt(lefttime/(1000*60*60*24)),
+			    hour=parseInt(lefttime/(1000*60*60)%24),
+			    minute=parseInt(lefttime/(1000*60)%60),
+			    second=parseInt(lefttime/1000%60);
+			if(lefttime<=0){
+				clearInterval(timer);
+				timeshow.innerHTML="团购已结束";
+			}else{timeshow.innerHTML=day+"天"+hour+"时"+minute+"分"+second+"秒";}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		限时抢 <span id="timeshow"></span>
+	</div>
+</body>
+</html>

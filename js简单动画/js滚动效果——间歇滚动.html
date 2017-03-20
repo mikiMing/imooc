@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>滚动</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			font-family: "Microsoft YaHei";
+		}
+		#mooc{
+			width:399px;
+			border:5px solid #ABABAB;
+			border-radius:15px;
+			margin:50px auto;
+		}
+		#moocTitle{
+			position: relative;
+			height:62px;
+			background-color: #D74657;
+			color:#fff;
+			border-radius:10px 10px 0 0;
+			font-size:24px;
+            line-height: 62px;
+            text-indent: 1em;
+		}
+		#moocTitle a{
+			font-size:12px;
+			line-height: 24px;
+			text-decoration: none;
+			color:#fff;
+			position:absolute;
+			right:15px;
+			bottom:13px;
+		}
+		#moocBox{
+			width:75%;
+			margin:0 auto;
+			font-size:13px;
+			height:144px;
+            overflow:hidden;
+            margin-top:10px;
+		}
+		#moocBox ul{
+			list-style: none;
+		}
+		#moocBox ul li{
+			height:24px;
+			line-height: 24px;
+		}
+		#moocBox ul li a{
+			text-decoration: none;
+			color:#333;
+		}
+		#moocBox ul li a:hover{
+			color:#D74657;
+		}
+		#moocBox ul li span{
+			float:right;
+			color:#aaa;
+		}
+	</style>
+</head>
+<body>
+	<div id="mooc">
+	    <!--头部-->
+		<div id="moocTitle">
+			慕课网最新课程<a href="#">更多>></a>
+		</div>
+		<!--头部结束-->
+		<!--中间-->
+		<div id="moocBox">
+			<ul>
+				<li>
+					<a href="#">1.学会html5 绝对的屌丝逆袭</a>
+					<span id="date">2013-09-18</span>
+				</li>
+				<li>
+					<a href="#">2.tab页面切换效果（案例）</a>
+					<span id="date">2013-10-19</span>
+				</li>
+				<li>
+					<a href="#">3.圆角水晶按钮制作（案例）</a>
+					<span id="date">2013-10-21</span>
+				</li>
+				<li>
+					<a href="#">4.HTML+CSS基础课程（系列）</a>
+					<span id="date">2013-11-01</span>
+				</li>
+				<li>
+					<a href="#">5.分页页码制作（案例）</a>
+					<span id="date">2013-11-06</span>
+				</li>
+				<li>
+					<a href="#">6.导航条菜单的制作（案例）</a>
+					<span id="date">2013-11-08</span>
+				</li>
+				<li>
+					<a href="#">7.信息列表制作（案例）</a>
+					<span id="date">2013-11-15</span>
+				</li>
+				<li>
+					<a href="#">8.下拉菜单制作（案例）</a>
+					<span id="date">2013-11-21</span>
+				</li>
+				<li>
+					<a href="#">9.如何实现新手引导效果</a>
+					<span id="date">2013-12-06</span>
+				</li>
+			</ul>
+		</div>
+		<!--中间结束-->
+	</div>
+	<script type="text/javascript">
+	    var area=document.getElementById("moocBox"),
+	        timer=null;
+        area.innerHTML+=area.innerHTML;
+        area.scrollTop=0;
+        function startScroll(){
+        	timer=setInterval(scrollUp,30);
+        	area.scrollTop++;
+        }
+        function scrollUp(){
+        	if(area.scrollTop%24==0){
+        		clearInterval(timer);
+        		setTimeout(startScroll,2000);
+        	}else{
+        		area.scrollTop++;
+        		if(area.scrollTop>=area.scrollHeight/2){
+        			area.scrollTop=0;
+        		}
+        	}
+        }
+        setTimeout(startScroll,2000);
+	</script>
+
+</body>
+</html>

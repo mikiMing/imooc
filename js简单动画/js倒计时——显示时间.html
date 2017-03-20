@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>显示时间</title>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oDiv=document.getElementById("div1");
+			setInterval(showTime,1000);
+		}
+		function checkTime(i){
+			if(i<10){
+				i="0"+i;
+			}
+			return i;
+		}
+		function showTime(){
+			var oDiv=document.getElementById("div1"),
+			    now=new Date(),
+			    year=now.getFullYear(),
+			    month=now.getMonth()+1,
+			    day=now.getDate(),
+			    hour=now.getHours(),
+			    minute=now.getMinutes(),
+			    second=now.getSeconds(),
+			    weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+			minute=checkTime(minute);
+			second=checkTime(second);
+			oDiv.innerHTML=year+"年"+month+"月"+day+"日"+weekday[now.getDay()]+hour+"时"+minute+"分"+second+"秒";
+
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">显示时间的位置</div>
+</body>
+</html>

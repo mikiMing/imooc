@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>倒计时时差</title>
+	<script type="text/javascript">
+		window.onload=function(){
+			var timeshow=document.getElementById("timeshow"),
+			    now=new Date(),
+			    target=new Date("2017,12,26"),
+			    lefttime=target.getTime()-now.getTime();
+			    lefttime=Math.ceil(lefttime/(1000*60*60*24));
+			if(lefttime>0){
+				timeshow.innerHTML=lefttime;
+			}else{
+				document.getElementById("div1").innerHTML="已超过设置时间";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+	距离设置时间还剩<span id="timeshow"></span>天
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>速度动画</title>
+	<style type="text/css">
+	    *{
+	    	margin:0;
+	    	padding:0;
+	    }
+		.div1{
+			width:200px;
+			height:100px;
+			background-color: red;
+			position:relative;
+			left:-200px;
+			filter:alpha(opacity=50);
+			opacity:0.5;
+			margin-bottom: 20px;
+		}
+		span{
+			display: inline-block;
+			width:20px;
+			height:70px;
+			background-color: blue;
+			position:absolute;
+			top:10px;
+			left:200px;
+			cursor:pointer;
+		}
+	</style>
+	<script type="text/javascript">
+	    var timer1=null,
+	        timer2=null,
+	        alpha=50;
+		window.onload=function(){
+			var oDiv=document.getElementsByTagName("div");
+			for(var i=0;i<oDiv.length;i++){
+		       oDiv[i].addEventListener("mouseover",function(){
+		       	startMove(this,"left",0);
+		       },false);
+		       oDiv[i].addEventListener("mouseover",function(){
+		       	colorChange(this,100);
+		       },false);
+		       oDiv[i].addEventListener("mouseout",function(){
+		       	startMove(this,"left",-200);
+		       },false);
+		       oDiv[i].addEventListener("mouseout",function(){
+		       	colorChange(this,40);
+		       },false);
+		  }
+	    }
+	    function startMove(obj,attr,itarget){
+			clearInterval(obj.timer1);
+			if(itarget>parseInt(getStyle(obj,attr))){
+				obj.timer1=setInterval(function(){
+					var icur=parseInt(getStyle(obj,attr)),
+					    speed=(itarget-icur)/20;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					if(itarget<=icur){
+						clearInterval(obj.timer1);
+					}else{
+						obj.style[attr]=icur+speed+"px";
+					}
+				},30);
+			}else{
+				obj.timer1=setInterval(function(){
+					var icur=parseInt(getStyle(obj,attr)),
+					    speed=(itarget-icur)/20;
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);
+					if(itarget>=icur){
+						clearInterval(obj.timer1);
+					}else{
+						obj.style[attr]=icur+speed+"px";
+					}
+				},30);
+			}
+		}
+		function colorChange(obj,itarget){
+			clearInterval(obj.timer2);
+			if(alpha<itarget){
+				obj.timer2=setInterval(function(){
+					if(alpha>=itarget){
+						clearInterval(obj.timer2);
+					}else{
+						alpha+=5;
+						obj.style.filter="alpha(opacity="+alpha+")";
+						obj.style.opacity=alpha/100;
+					}
+				},100);
+			}else{
+				obj.timer2=setInterval(function(){
+					if(alpha<=itarget){
+						clearInterval(obj.timer2);
+					}else{
+						alpha-=5;
+						obj.style.filter="alpha(opacity="+alpha+")";
+						obj.style.opacity=alpha/100;
+					}
+				},100);
+			}
+		}
+		function getStyle(obj,attr){
+	 		if(obj.currentStyle){
+	 			return obj.currentStyle[attr];
+	 		}else{
+	 			return getComputedStyle(obj,false)[attr];
+	 		}
+	 	}
+
+	</script>
+</head>
+<body>
+	<div class="div1"><span>分享1</span></div>
+	<div class="div1"><span>分享2</span></div>
+	<div class="div1"><span>分享3</span></div>
+	<div class="div1"><span>分享4</span></div>
+</body>
+</html>
