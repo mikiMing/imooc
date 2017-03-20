@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab选项卡切换效果——js触发</title>
+	<link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+</head>
+<body>
+	<ul class="nav nav-tabs" role="tablist" id="myTab">
+		<li class="active"><a data-target="#entertainment" role="tab">娱乐</a></li>
+		<li><a data-target="#house" role="tan">房产</a></li>
+		<li><a data-target="#inner" role="tan">国内</a></li>
+		<li><a data-target="#outer" role="tan">国外</a></li>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane active fade in" id="entertainment">娱乐内容面板</div>
+		<div class="tab-pane fade" id="house">房产内容面板</div>
+		<div class="tab-pane fade" id="inner">国内内容面板</div>
+		<div class="tab-pane fade" id="outer">国外内容面板</div>
+	</div>
+	<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$("#myTab a").click(function(e){
+			$(this).tab("show");
+		});
+	</script>
+</body>
+</html>

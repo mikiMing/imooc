@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟按钮插件</title>
+	<link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+</head>
+<body>
+	<button class="btn btn-primary" data-loading-text="loading..." type="button" id="loaddingBtn">loading state</button>
+	<script type="text/javascript" src="../jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$("#loaddingBtn").click(function(){
+			$(this).button("loading");
+		});
+	</script>
+</body>
+</html>
